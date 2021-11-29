@@ -1,25 +1,36 @@
-import logo from './logo.svg';
+import { Grid, makeStyles } from '@material-ui/core';
+import NavBar from './components/NavBar';
 import './App.css';
+import LeftBar from './components/LeftBar';
+import Feeds from './components/Feeds';
+import RightBar from './components/RightBar';
+import Add from './components/Add';
+
+const useStyles = makeStyles((theme) =>({
+  right: {
+    [theme.breakpoints.down("sm")]:{
+      display: "none"
+    }
+  }
+}))
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const classes = useStyles();
+  return <div>
+    <NavBar />
+    <Grid container>
+      <Grid item  sm={2} xs={2}>
+        <LeftBar />
+      </Grid>
+      <Grid item  sm={7} xs={10}>
+        <Feeds />
+      </Grid>
+      <Grid item  sm={3} className={classes.right}>
+        <RightBar />
+      </Grid>
+    </Grid>
+    <Add />
+  </div>
 }
 
 export default App;
